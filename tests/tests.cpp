@@ -24,37 +24,46 @@ TEST_CASE("basic ull tests") {
 
     MyNode n1;
     MyNode2 n2;
-    utree::Container cc;
 
+    utree::Container cc;
     utree::Container c;
 
     c.addChild(n1);
     c.addChild(n2);
     c.addChild(cc);
 
-    n1.mContent.a = 55;
-    n1.mContent.b = 89;
-
     ((MyNode::Content*) c[0].content())->a = 23;
+    ((MyNode::Content*) c[0].content())->b = 42;
+
+    CHECK(n1.mContent.a == 23);
+    CHECK(n1.mContent.b == 42);
+
+    CHECK(&((MyNode::Content*) c[0].content())->a == &n1.mContent.a);
+    CHECK(&((MyNode::Content*) c[0].content())->b == &n1.mContent.b);
+
+    CHECK(((char*) c[1].content()) == n2.str);
+
+    CHECK(c[0].size() == sizeof(MyNode::Content));
+    CHECK(c[1].size() == sizeof(MyNode2::str));
+
 
     uint8_t i = 0;
 
     for (auto& e : c) {
 
-        switch (i) {
+        switch (i++) {
 
             case 0:
-                std::cout << ((MyNode::Content*) e.content())->a << " " << ((MyNode::Content*) e.content())->b << std::endl;
+                CHECK(((MyNode::Content*) e.content())->a == n1.mContent.a);
+                CHECK(((MyNode::Content*) e.content())->b == n1.mContent.b);
                 break;
-
             case 1:
-                std::cout << (char*) e.content() << std::endl;
+                CHECK((char*) e.content() == n2.str);
                 break;
             default:
                 break;
         }
 
-        i++;
     }
 
 }
