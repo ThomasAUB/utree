@@ -11,7 +11,7 @@ Lightweight C++ tree structure for microcontrollers.
 ```cpp
 #include "utree.hpp"
 
-struct MyNodeA : utree::Node<MyNode> {
+struct MyNodeA : utree::Node<MyNodeA> {
     
     struct Content {
         int a;
@@ -21,7 +21,7 @@ struct MyNodeA : utree::Node<MyNode> {
     Content mContent;
 };
 
-struct MyNodeB : utree::Node<MyNode> {
+struct MyNodeB : utree::Node<MyNodeB> {
     char mText[16] = "Hello world";
 };
 
