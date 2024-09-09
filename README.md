@@ -1,3 +1,7 @@
+![build status](https://github.com/ThomasAUB/utree/actions/workflows/build.yml/badge.svg)
+[![License](https://img.shields.io/github/license/ThomasAUB/utree)](LICENSE)
+
+
 # utree
 
 Lightweight C++ tree structure for microcontrollers.
